@@ -1,0 +1,66 @@
+这个类用于移除连续三个或更多相同字符的字符串：
+A
+package com.example;
+
+public class ConsecutiveRemover {
+    public String removeConsecutive(String input) {
+        if (input == null || input.isEmpty()) return input;
+
+        StringBuilder sb = new StringBuilder(input);
+        boolean changed;
+
+        do {
+            changed = false;
+            for (int i = 0; i < sb.length() - 2; ) {
+                if (sb.charAt(i) == sb.charAt(i + 1) && sb.charAt(i) == sb.charAt(i + 2)) {
+                    char toRemove = sb.charAt(i);
+                    int j = i;
+                    while (j < sb.length() && sb.charAt(j) == toRemove) {
+                        j++;
+                    }
+                    sb.delete(i, j);
+                    changed = true;
+                } else {
+                    i++;
+                }
+            }
+        } while (changed);
+
+        return sb.toString();
+    }
+}
+
+
+
+B
+这个类用于替换连续三个或更多相同字符为它们前一个字母：
+package com.example;
+
+public class ConsecutiveReplacer {
+    public String replaceConsecutive(String input) {
+        if (input == null || input.isEmpty()) return input;
+
+        StringBuilder sb = new StringBuilder(input);
+        boolean changed;
+
+        do {
+            changed = false;
+            for (int i = 0; i < sb.length() - 2; ) {
+                if (sb.charAt(i) == sb.charAt(i + 1) && sb.charAt(i) == sb.charAt(i + 2)) {
+                    char toReplace = sb.charAt(i);
+                    char replacement = (char) (toReplace - 1);
+                    int j = i;
+                    while (j < sb.length() && sb.charAt(j) == toReplace) {
+                        j++;
+                    }
+                    sb.replace(i, j, String.valueOf(replacement));
+                    changed = true;
+                } else {
+                    i++;
+                }
+            }
+        } while (changed);
+
+        return sb.toString();
+    }
+}
